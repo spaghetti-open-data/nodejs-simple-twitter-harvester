@@ -1,16 +1,16 @@
 var twitter = require('ntwitter');
 var mongoose = require('mongoose');
-var credentials = require('./config_twitter.js');
+var twitter_conf = require('./config_twitter.js');
 var config = require('./config.js');
 
 // mapped 1-1 to Twitter object
 var twschema = new mongoose.Schema(config.tw_harvest_schema_11, {autoindex: true});
 
 var t = new twitter({
-    consumer_key: credentials.twit_consumer_key,
-    consumer_secret: credentials.twit_consumer_secret,
-    access_token_key: credentials.twit_access_token,
-    access_token_secret: credentials.twit_token_secret
+    consumer_key: twitter_conf.twit_consumer_key,
+    consumer_secret: twitter_conf.twit_consumer_secret,
+    access_token_key: twitter_conf.twit_access_token,
+    access_token_secret: twitter_conf.twit_token_secret
 });
 
 // connect to dataabse
@@ -62,11 +62,11 @@ TwitStore.getLastTweet(function(item) {
 
   // https://dev.twitter.com/docs/api/1/get/search
   // maximum number
-  query.count = config.twitter_query_count; 
-  query.q = config.twitter_harvest_search; 
-  query.result_type = config.twitter_result_type; 
-  var url = "https://api.twitter.com/1.1/search/tweets.json";
- 
+  query.count = twitter_conf.twitter_query_count;
+  query.q = twitter_conf.twitter_harvest_search;
+  query.result_type = twitter_conf.twitter_result_type;
+  var url = twitter_conf.twitter_search_url;
+
   t.get(url, query, function(err, data) {
     if (typeof(data) != 'undefined' && data.statuses.length) {
       res = data.statuses;

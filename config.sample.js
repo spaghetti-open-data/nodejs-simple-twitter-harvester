@@ -5,11 +5,6 @@ var config = {
   db_name: 'YOUR_MONGODB_DBNAME',
   db_collection_twitter: 'YOUR_MONGODB_COLLECTION',
   db_debug: 0,
-  twitter_auth: false,
-  twitter_harvest_search: '#HASHTAG_TO_SEARCH', // hashtags can be combined (example #apple OR #pear)
-  twitter_query_count: 100,
-  twitter_result_type: "recent",
-
 
   // Twitter Harvester Schema API 1.1
   tw_harvest_schema_11: {
