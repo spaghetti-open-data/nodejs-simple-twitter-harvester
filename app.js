@@ -1,7 +1,35 @@
 var twitter = require('ntwitter');
 var mongoose = require('mongoose');
+var restify = require('restify');
 var twitter_conf = require('./config_twitter.js');
 var config = require('./config.js');
+
+// REST API implementation - first draft
+
+// TODO - Implement a switch to detect an empty req and return all the raw shit
+function respond(req, res, next){
+  res.send(' ');
+  next();
+}
+
+function picRespond(req, res, next){
+  res.send(' ');
+  next();
+}
+
+// Creating the server
+var server = restify.createServer({name: "tHarvester"});
+
+server.get('/username/:name', respond);
+server.head('/username/:name', respond);
+server.get('/photos', picRespond);
+server.head('/photos', picRespond);
+server.get('/', respond);
+server.head('/', respond);
+
+server.listen(8080, function() {
+  console.log('%s listening at %s', server.name, server.url);
+});
 
 // mapped 1-1 to Twitter object
 var twschema = new mongoose.Schema(config.tw_harvest_schema_11, {autoindex: true});
