@@ -1,11 +1,12 @@
 {
-  "name": "Nodejs simple twitter harvester",
+  "name": "Nodejs_tw_harvester",
   "version": "0.0.1-1",
   "private": true,
   "dependencies": {
     "mongoose": "*",
     "request": "*",
-    "ntwitter": "*"
+    "ntwitter": "*",
+    "restify": "*"
   },
   "subdomain": "",
   "engines": {
