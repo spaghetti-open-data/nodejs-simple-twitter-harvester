@@ -129,19 +129,27 @@ function nameRespond(req, res, next){
   next();
 }
 
-// TODO
-// function picRespond(req, res, next){
-//   res.send(' ');
-//   next();
-// }
+function picRespond(req, res, next){
+  TweetElement.find({}, function(err, results){
+    if(err){
+      console.log('OHMAMAMIAAA');
+      process.exit(0);
+    }
+
+    console.log(results);
+    res.send(results);
+  }).exists('media', true); // Only a draft but it seems to work
+
+  next();
+}
 
 // Creating the server
 var server = restify.createServer({name: "tHarvester"});
 
 server.get('/username/:name', nameRespond);
 server.head('/username/:name', nameRespond);
-// server.get('/photos', picRespond);
-// server.head('/photos', picRespond);
+server.get('/photos', picRespond);
+server.head('/photos', picRespond);
 server.get('/', respond);
 server.head('/', respond);
 
